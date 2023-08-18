@@ -28,12 +28,16 @@ public class Basics : MonoBehaviour
     {
         for (int i = 0; i < transforms.Length; i++)
         {
+            if (transforms[i] == null)
+                continue;
+
+
             transforms[i].Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
             transforms[i].Rotate(new Vector3(-1, 0, 0) * Rotatespeed * Time.deltaTime);
 
             float posX = transforms[i].position.x;
-            if (posX < -10f && transforms[1].gameObject.name == "Cube")
-                Destroy(transforms[1].gameObject);
+            if (posX < -10f && transforms[i].gameObject.name == "Cube")
+                Destroy(transforms[i].gameObject);
         }
 
     }
