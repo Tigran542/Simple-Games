@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnableLight : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public Light mainlig;
+    private void Update()
     {
-        
+        if (Input.GetKeyUp(KeyCode.Space))
+            mainlig.enabled = !mainlig.enabled;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
