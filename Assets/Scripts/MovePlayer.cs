@@ -1,5 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -8,17 +9,20 @@ public class MovePlayer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-                transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed);
+        //if (Input.GetKey(KeyCode.UpArrow))
+        // transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed);
 
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-            transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * -speed);
+        //if (Input.GetKey(KeyCode.DownArrow))
+        //  transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * -speed);
 
-        //if (Input.GetKeyUp(KeyCode.RightArrow))
-            //transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed);
+        float v = Input.GetAxis("Vertical");
+        transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed * v);
 
-       // if (Input.GetKeyUp(KeyCode.LeftArrow))
-          //  transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed);
+        float h = Input.GetAxis("Horizontal");
+        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * speed * h);
+
+       // if (Input.GetKey(KeyCode.Space))
+        // transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * speed);
     }
 
 }
