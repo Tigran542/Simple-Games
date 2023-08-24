@@ -1,28 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
 
-    public float speed = 5f;
+    public float speed = 5f, hSpeed = 10f, _thrust = 500f;
+    private Rigidbody _rb;
 
-    private void Update()
+    private void Awake()
     {
-        //if (Input.GetKey(KeyCode.UpArrow))
-        // transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed);
+        _rb = GetComponent<Rigidbody>();
+    }
 
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //  transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * -speed);
 
-        float v = Input.GetAxis("Vertical");
-        transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed * v);
+    private void FixedUpdate()
+    {
+        float h = Input.GetAxis("Horizontal") * hSpeed * Time.fixedDeltaTime;
+        float v = Input.GetAxis("Vertical") * speed * Time.fixedDeltaTime;
 
-        float h = Input.GetAxis("Horizontal");
-        transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * speed * h);
+        _rb.velocity = transform.TransformDirection(new Vector3(-v, _rb.velocity.y, h));
+    }
 
-       // if (Input.GetKey(KeyCode.Space))
-        // transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * speed);
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.name == "Block")
+        {
+            _rb.AddForce(new Vector3(0, 1, 0) * _thrust);
+        }
+    }
+    private void OnCollisionStay(Collision other)
+    {
+       // Debug.Log("Penis");
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        Debug.Log("Penis");
     }
 
 }
