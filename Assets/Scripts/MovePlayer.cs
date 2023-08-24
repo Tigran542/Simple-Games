@@ -29,11 +29,34 @@ public class MovePlayer : MonoBehaviour
     }
     private void OnCollisionStay(Collision other)
     {
-       // Debug.Log("Penis");
+       // Debug.Log("Zoski");
     }
     private void OnCollisionExit(Collision other)
     {
-        Debug.Log("Penis");
+        Debug.Log("Zoski");
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "TriggerMain")
+        {
+            Debug.Log("ZaLebigu");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "TriggerMain")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name == "TriggerMain")
+        {
+            Debug.Log("ZaZelenskogo");
+        }
+    }
 }
