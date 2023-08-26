@@ -6,10 +6,11 @@ public class CreateObjects : MonoBehaviour
 {
 
     public GameObject[] obj;
-    private void Start()
+    private void Update()
     {
         // Invoke("Create", 2f);
-        StartCoroutine(Create3dObjects());
+        if(Input.GetKeyUp(KeyCode.P))
+         StartCoroutine(Create3dObjects(2f));
     }
 
     private void Create()
@@ -28,10 +29,12 @@ public class CreateObjects : MonoBehaviour
         return UnityEngine.Random.Range(0, obj.Length);
     }
 
-    private IEnumerator Create3dObjects()
+    private IEnumerator Create3dObjects(float wait)
     {
-        yield return new WaitForSeconds(3f);
-        Create();
-        Debug.Log("Lebiga");
+        while (true)
+        {
+            Instantiate(obj[UnityEngine.Random.Range(0, obj.Length)], new Vector3(RandomNumber(), RandomNumber(), RandomNumber()), Quaternion.Euler(RandomNumber(), -15f, 40f));
+            yield return new WaitForSeconds(wait);
+        }
     }
 }
